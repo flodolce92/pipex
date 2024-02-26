@@ -6,7 +6,7 @@
 #    By: flo-dolc <flo-dolc@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/26 08:22:57 by flo-dolc          #+#    #+#              #
-#    Updated: 2024/02/26 15:32:01 by flo-dolc         ###   ########.fr        #
+#    Updated: 2024/02/26 16:09:36 by flo-dolc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ NAME		=	pipex
 
 CC			=	gcc
 
-CFLAGS		=	#-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror
 
 RM			=	rm -f
 
@@ -59,6 +59,5 @@ re:				fclean all
 
 norm:
 				@norminette $(SRCS)
-				@make -C ./libft norm
 
 .PHONY:			all clean fclean re norm
