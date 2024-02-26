@@ -6,7 +6,7 @@
 /*   By: flo-dolc <flo-dolc@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 08:27:16 by flo-dolc          #+#    #+#             */
-/*   Updated: 2024/02/26 14:28:47 by flo-dolc         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:17:13 by flo-dolc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,11 @@
 
 # define READ_END 0
 # define WRITE_END 1
+
+void	print_error(char *msg, int exit_code);
+void	create_child(char *arg, char **envp);
+void	exec_cmd(char *arg, char **envp);
+char	*get_path(char *cmd, char **envp);
+void	free_arr(char **arr);
 
 #endif
