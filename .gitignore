@@ -5,5 +5,3 @@
 *.o
 *.a
 pipex
-infile
-outfile
