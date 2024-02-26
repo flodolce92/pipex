@@ -6,7 +6,7 @@
 /*   By: flo-dolc <flo-dolc@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:23:08 by flo-dolc          #+#    #+#             */
-/*   Updated: 2024/01/17 20:48:34 by flo-dolc         ###   ########.fr       */
+/*   Updated: 2024/02/26 20:29:55 by flo-dolc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
+# include "get_next_line.h"
 
 typedef struct s_list
 {
