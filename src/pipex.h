@@ -6,7 +6,7 @@
 /*   By: flo-dolc <flo-dolc@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 08:27:16 by flo-dolc          #+#    #+#             */
-/*   Updated: 2024/02/26 20:38:32 by flo-dolc         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:16:25 by flo-dolc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include <fcntl.h>
 # include "libft.h"
 

@@ -6,7 +6,7 @@
 /*   By: flo-dolc <flo-dolc@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:44:55 by flo-dolc          #+#    #+#             */
-/*   Updated: 2024/02/26 16:05:37 by flo-dolc         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:44:07 by flo-dolc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	**get_env_paths(char **envp)
 	int		i;
 
 	i = 0;
+	paths = NULL;
 	while (envp[i])
 	{
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
