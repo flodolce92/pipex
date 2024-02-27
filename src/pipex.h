@@ -6,7 +6,7 @@
 /*   By: flo-dolc <flo-dolc@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 08:27:16 by flo-dolc          #+#    #+#             */
-/*   Updated: 2024/02/27 19:16:25 by flo-dolc         ###   ########.fr       */
+/*   Updated: 2024/02/27 20:11:36 by flo-dolc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	create_child(char *arg, char **envp);
 void	exec_cmd(char *arg, char **envp);
 char	*get_path(char *cmd, char **envp);
 void	free_arr(char **arr);
+char	**ft_split_v2(const char *str, char c);
 
 #endif
