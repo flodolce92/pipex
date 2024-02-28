@@ -6,7 +6,7 @@
 /*   By: flo-dolc <flo-dolc@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:50:44 by flo-dolc          #+#    #+#             */
-/*   Updated: 2024/02/27 20:45:14 by flo-dolc         ###   ########.fr       */
+/*   Updated: 2024/02/28 02:24:07 by flo-dolc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,13 @@ static void	fill_word(char *dest, const char *src, int len)
 	dest[i] = '\0';
 }
 
-static void	jump_apex(int *i, const char *str)
+static void	jump_apex(int *i, const char *str, char *c)
 {
 	if (str[*i] == '\'' || str[*i] == '\"')
 	{
-		ft_putstr_fd("apex found: ", 2);
-		ft_putchar_fd(str[*i], 2);
-		ft_putchar_fd('\n', 2);
+		*c = str[*i];
 		(*i)++;
-		while (str[*i] != '\'' && str[*i] != '\"' && str[*i])
-			(*i)++;
-		if (str[*i] == '\'' || str[*i] == '\"')
-			(*i)++;
 	}
-	ft_putchar_fd(str[*i], 2);
-	ft_putchar_fd('\n', 2);
 }
 
 static int	fill_split_v2(char **split, const char *str, char c)
@@ -71,18 +63,18 @@ static int	fill_split_v2(char **split, const char *str, char c)
 	{
 		if (str[i] == c || str[i] == '\0')
 			i++;
+		else if (str[i] == '\'' || str[i] == '\"')
+			jump_apex(&i, str, &c);
 		else
 		{
-			jump_apex(&i, str);
 			len = 1;
 			while (str[i + len] != c && str[i + len])
 				len++;
 			split[word] = (char *) malloc(sizeof(char) * (len + 1));
 			if (!split[word])
 				return (free_arr(split), 0);
-			fill_word(split[word], &str[i], len);
+			fill_word(split[word++], &str[i], len);
 			i += len;
-			word++;
 		}
 	}
 	return (1);

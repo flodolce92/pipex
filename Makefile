@@ -6,7 +6,7 @@
 #    By: flo-dolc <flo-dolc@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/26 08:22:57 by flo-dolc          #+#    #+#              #
-#    Updated: 2024/02/27 19:56:24 by flo-dolc         ###   ########.fr        #
+#    Updated: 2024/02/28 02:03:29 by flo-dolc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ norm:
 				@norminette $(SRCS)
 
 test:			re
+				@clear
 				@touch infile
 				@rm -f $(OBJ)
 				./pipex infile "ls -la" "grep .c" "wc -l" outfile

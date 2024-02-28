@@ -6,7 +6,7 @@
 /*   By: flo-dolc <flo-dolc@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:44:55 by flo-dolc          #+#    #+#             */
-/*   Updated: 2024/02/27 20:34:47 by flo-dolc         ###   ########.fr       */
+/*   Updated: 2024/02/28 02:26:07 by flo-dolc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,16 @@ void	exec_cmd(char *arg, char **envp)
 	char	*path;
 	char	**cmd_args;
 
-	ft_putstr_fd("arg = ", 2);
-	ft_putstr_fd(arg, 2);
-	ft_putstr_fd("\n", 2);
+	// ft_putstr_fd("arg = ", 2);
+	// ft_putstr_fd(arg, 2);
+	// ft_putstr_fd("\n", 2);
 	cmd_args = ft_split_v2(arg, ' ');
-	ft_putstr_fd("cmd_args[0] = ", 2);
-	ft_putstr_fd(cmd_args[0], 2);
-	ft_putstr_fd("\n", 2);
-	ft_putstr_fd("cmd_args[1] = ", 2);
-	ft_putstr_fd(cmd_args[1], 2);
-	ft_putstr_fd("\n", 2);
+	// ft_putstr_fd("cmd_args[0] = ", 2);
+	// ft_putstr_fd(cmd_args[0], 2);
+	// ft_putstr_fd("\n", 2);
+	// ft_putstr_fd("cmd_args[1] = ", 2);
+	// ft_putstr_fd(cmd_args[1], 2);
+	// ft_putstr_fd("\n", 2);
 	path = get_path(cmd_args[0], envp);
 	if (path == NULL)
 	{
