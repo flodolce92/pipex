@@ -6,7 +6,7 @@
 #    By: flo-dolc <flo-dolc@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/26 08:22:57 by flo-dolc          #+#    #+#              #
-#    Updated: 2024/02/29 20:01:55 by flo-dolc         ###   ########.fr        #
+#    Updated: 2024/02/29 20:03:30 by flo-dolc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,44 +61,4 @@ re:				fclean all
 norm:
 				@norminette $(SRCS)
 
-test:			re
-				@clear
-				@touch infile
-				@rm -f $(OBJ)
-				./pipex infile "ls -la" "grep .c" "wc -l" outfile
-				@cat outfile
-				@rm outfile
-				< infile ls -la | grep .c | wc -l > outfile
-				@cat outfile
-				@rm outfile
-				@echo ---------------------------------
-				./pipex infile "echo 'il senzo della vita: 42\0'" "grep 42" "tr a-z A-Z" "head -10" "cat -e" "wc -l" outfile
-				@cat outfile
-				@rm outfile
-				< infile echo 'il senzo della vita: 42\0' | grep 42 | tr a-z A-Z | head -10 | cat -e | wc -l > outfile
-				@cat outfile
-				@rm outfile
-				@echo ---------------------------------
-				@echo " a" > infile
-				@echo " a" >> infile
-				@echo " g" >> infile
-				@echo " a" >> infile
-				@echo "a" >> infile
-				@echo "a" >> infile
-				./pipex infile "grep ' '" "grep a" "head -10" "cat -e" "wc -l" outfile
-				@cat outfile
-				@rm outfile
-				< infile grep ' ' | grep a | head -10 | cat -e | wc -l > outfile
-				@cat outfile
-				@echo ---------------------------------
-				@rm infile
-				@echo "===== CONTROLLO HERE_DOC ====="
-				./pipex here_doc fine "grep '42'" "grep ' '" "cat -e" "wc" outfile
-				@cat outfile
-				grep 42 << fine | grep ' ' | cat -e | wc >> outfile
-				@cat outfile
-				@rm outfile
-				@echo ---------------------------------
-				@rm -f $(NAME)
-
-.PHONY:			all clean fclean re norm test
+.PHONY:			all clean fclean re norm
