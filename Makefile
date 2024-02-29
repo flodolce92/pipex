@@ -6,7 +6,7 @@
 #    By: flo-dolc <flo-dolc@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/26 08:22:57 by flo-dolc          #+#    #+#              #
-#    Updated: 2024/02/28 02:03:29 by flo-dolc         ###   ########.fr        #
+#    Updated: 2024/02/29 05:32:54 by flo-dolc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SRCS_DIR	=	src/
 
 SRC			=	pipex.c \
 				execute.c \
-				create_child.c \
+				pipex_utils.c \
 				ft_split.c
 
 SRCS		=	$(addprefix $(SRCS_DIR), $(SRC))

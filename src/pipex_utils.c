@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_child.c                                     :+:      :+:    :+:   */
+/*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flo-dolc <flo-dolc@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:19 by flo-dolc          #+#    #+#             */
-/*   Updated: 2024/02/29 04:57:45 by flo-dolc         ###   ########.fr       */
+/*   Updated: 2024/02/29 05:38:10 by flo-dolc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void	create_child(char *arg, char **envp)
 	}
 }
 
-void	delete_tmp_file(int argc, char **argv, char *infile_name)
+void	delete_tmp_file(char *infile_name)
 {
-	if (argc >= 6 && ft_strncmp(argv[1], "here_doc", 8) == 0)
-		unlink(infile_name);
+	if (unlink(infile_name) == -1)
+		print_error("unlink failed", -1);
 }
 
 void	write_here_doc(char *limiter, char *infile_name)
@@ -67,4 +67,25 @@ void	write_here_doc(char *limiter, char *infile_name)
 		free(line);
 	}
 	close(infile);
+}
+
+void	open_files(t_pipex *pipex, int argc, char **argv)
+{
+	pipex->infile = open(pipex->infile_name, O_RDONLY);
+	if (pipex->infile == -1)
+		print_error("open infile failed", -1);
+	pipex->outfile = open(argv[argc - 1], pipex->flags, 0644);
+	if (pipex->outfile == -1)
+		print_error("open outfile failed", -1);
+	dup2(pipex->infile, STDIN_FILENO);
+}
+
+void	last_command(int argc, char **argv, char **envp, t_pipex pipex)
+{
+	close(pipex.infile);
+	if (argc >= 6 && ft_strncmp(argv[1], "here_doc", 8) == 0)
+		delete_tmp_file(pipex.infile_name);
+	dup2(pipex.outfile, STDOUT_FILENO);
+	exec_cmd(argv[argc - 2], envp);
+	print_error("execve failed", 1);
 }

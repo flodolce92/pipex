@@ -6,7 +6,7 @@
 /*   By: flo-dolc <flo-dolc@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 08:25:49 by flo-dolc          #+#    #+#             */
-/*   Updated: 2024/02/29 05:08:49 by flo-dolc         ###   ########.fr       */
+/*   Updated: 2024/02/29 05:40:15 by flo-dolc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,42 +23,34 @@ void	print_error(char *msg, int exit_code)
 	exit(exit_code);
 }
 
+void	check_here_doc(int argc, char **argv, t_pipex *pipex, int *i)
+{
+	if (argc >= 6 && ft_strncmp(argv[1], "here_doc", 8) == 0)
+	{
+		(*i) = 3;
+		pipex->flags = O_WRONLY | O_CREAT | O_APPEND;
+		pipex->infile_name = ".here_doc";
+		write_here_doc(argv[2], pipex->infile_name);
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	int		i;
-	int		infile;
-	int		outfile;
-	int		flags;
-	char	*infile_name;
+	t_pipex	pipex;
 
 	i = 2;
-	infile_name = argv[1];
-	flags = O_WRONLY | O_CREAT | O_TRUNC;
+	pipex.infile_name = argv[1];
+	pipex.flags = O_WRONLY | O_CREAT | O_TRUNC;
 	if (argc < 5)
 		print_error("wrong number of arguments", 1);
-	if (argc >= 6 && ft_strncmp(argv[1], "here_doc", 8) == 0)
-	{
-		i = 3;
-		flags = O_WRONLY | O_CREAT | O_APPEND;
-		infile_name = ".here_doc";
-		write_here_doc(argv[2], infile_name);
-	}
-	infile = open(infile_name, O_RDONLY);
-	if (infile == -1)
-		print_error("open infile failed", -1);
-	outfile = open(argv[argc - 1], flags, 0644);
-	if (outfile == -1)
-		print_error("open outfile failed", -1);
-	dup2(infile, STDIN_FILENO);
+	check_here_doc(argc, argv, &pipex, &i);
+	open_files(&pipex, argc, argv);
 	while (i < argc - 2)
 	{
 		create_child(argv[i], envp);
 		i++;
 	}
-	close(infile);
-	delete_tmp_file(argc, argv, infile_name);
-	dup2(outfile, STDOUT_FILENO);
-	exec_cmd(argv[argc - 2], envp);
-	print_error("execve failed", 1);
+	last_command(argc, argv, envp, pipex);
 	return (0);
 }
