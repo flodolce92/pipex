@@ -6,7 +6,7 @@
 /*   By: flo-dolc <flo-dolc@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 08:27:16 by flo-dolc          #+#    #+#             */
-/*   Updated: 2024/02/27 20:11:36 by flo-dolc         ###   ########.fr       */
+/*   Updated: 2024/02/29 04:57:57 by flo-dolc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <errno.h>
 # include "libft.h"
 
 # define READ_END 0
@@ -29,5 +30,7 @@ void	exec_cmd(char *arg, char **envp);
 char	*get_path(char *cmd, char **envp);
 void	free_arr(char **arr);
 char	**ft_split_v2(const char *str, char c);
+void	delete_tmp_file(int argc, char **argv, char *infile_name);
+void	write_here_doc(char *limiter, char *infile_name);
 
 #endif
