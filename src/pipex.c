@@ -6,7 +6,7 @@
 /*   By: flo-dolc <flo-dolc@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 08:25:49 by flo-dolc          #+#    #+#             */
-/*   Updated: 2024/02/29 05:40:15 by flo-dolc         ###   ########.fr       */
+/*   Updated: 2025/05/04 22:45:21 by flo-dolc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,16 @@ void	print_error(char *msg, int exit_code)
 {
 	ft_putstr_fd("Error: ", 2);
 	ft_putstr_fd(msg, 2);
-	ft_putstr_fd("\n", 2);
-	unlink(".here_doc");
 	if (errno != 0)
+	{
+		ft_putstr_fd(": ", 2);
 		perror("");
-	exit(exit_code);
+	}
+	else
+		ft_putstr_fd("\n", 2);
+	unlink(".here_doc");
+	if (exit_code != -1)
+		exit(exit_code);
 }
 
 void	check_here_doc(int argc, char **argv, t_pipex *pipex, int *i)

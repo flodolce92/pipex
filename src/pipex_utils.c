@@ -6,7 +6,7 @@
 /*   By: flo-dolc <flo-dolc@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:19 by flo-dolc          #+#    #+#             */
-/*   Updated: 2024/02/29 05:38:10 by flo-dolc         ###   ########.fr       */
+/*   Updated: 2025/05/04 22:46:38 by flo-dolc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	create_child(char *arg, char **envp)
 	int		pid;
 
 	if (pipe(pipe_fd) == -1)
-		print_error("pipe failed", -1);
+		print_error("pipe failed", 1);
 	pid = fork();
 	if (pid == -1)
-		print_error("fork failed", -1);
+		print_error("fork failed", 1);
 	if (pid == 0)
 	{
 		close(pipe_fd[READ_END]);
@@ -41,7 +41,7 @@ void	create_child(char *arg, char **envp)
 void	delete_tmp_file(char *infile_name)
 {
 	if (unlink(infile_name) == -1)
-		print_error("unlink failed", -1);
+		print_error("unlink failed", 1);
 }
 
 void	write_here_doc(char *limiter, char *infile_name)
@@ -52,7 +52,7 @@ void	write_here_doc(char *limiter, char *infile_name)
 	line = NULL;
 	infile = open(infile_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (infile == -1)
-		print_error("create infile failed", -1);
+		print_error("create infile failed", 1);
 	while (1)
 	{
 		line = get_next_line(STDIN_FILENO);
@@ -76,7 +76,7 @@ void	open_files(t_pipex *pipex, int argc, char **argv)
 		print_error("open infile failed", -1);
 	pipex->outfile = open(argv[argc - 1], pipex->flags, 0644);
 	if (pipex->outfile == -1)
-		print_error("open outfile failed", -1);
+		print_error("open outfile failed", 1);
 	dup2(pipex->infile, STDIN_FILENO);
 }
 

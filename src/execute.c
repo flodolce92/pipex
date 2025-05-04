@@ -6,7 +6,7 @@
 /*   By: flo-dolc <flo-dolc@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:44:55 by flo-dolc          #+#    #+#             */
-/*   Updated: 2024/02/28 03:36:38 by flo-dolc         ###   ########.fr       */
+/*   Updated: 2025/05/04 22:24:55 by flo-dolc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,18 @@ char	*get_path(char *cmd, char **envp)
 {
 	char	**paths;
 	char	*path;
+	char	*tmp;
 	int		i;
 
 	paths = get_env_paths(envp);
-	i = 0;
-	while (paths[i++])
+	if (!paths)
+		return (NULL);
+	i = -1;
+	while (paths[++i])
 	{
-		path = ft_strjoin(paths[i], "/");
-		path = ft_strjoin(path, cmd);
+		tmp = ft_strjoin(paths[i], "/");
+		path = ft_strjoin(tmp, cmd);
+		free(tmp);
 		if (access(path, F_OK) == 0)
 		{
 			free_arr(paths);
