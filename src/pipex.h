@@ -6,7 +6,7 @@
 /*   By: flo-dolc <flo-dolc@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 08:27:16 by flo-dolc          #+#    #+#             */
-/*   Updated: 2024/02/29 05:24:51 by flo-dolc         ###   ########.fr       */
+/*   Updated: 2025/09/22 03:30:12 by flo-dolc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <sys/wait.h>
 # include <sys/types.h>
+# include <stdbool.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -40,7 +41,7 @@ void	free_arr(char **arr);
 char	**ft_split_v2(const char *str, char c);
 void	delete_tmp_file(char *infile_name);
 void	write_here_doc(char *limiter, char *infile_name);
-void	open_files(t_pipex *pipex, int argc, char **argv);
+bool	open_files(t_pipex *pipex, int argc, char **argv);
 void	last_command(int argc, char **argv, char **envp, t_pipex pipex);
 
 #endif

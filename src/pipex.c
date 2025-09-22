@@ -6,7 +6,7 @@
 /*   By: flo-dolc <flo-dolc@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 08:25:49 by flo-dolc          #+#    #+#             */
-/*   Updated: 2025/05/04 22:45:21 by flo-dolc         ###   ########.fr       */
+/*   Updated: 2025/09/22 03:30:30 by flo-dolc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	main(int argc, char **argv, char **envp)
 	if (argc < 5)
 		print_error("wrong number of arguments", 1);
 	check_here_doc(argc, argv, &pipex, &i);
-	open_files(&pipex, argc, argv);
+	if (!open_files(&pipex, argc, argv))
+		return (1);
 	while (i < argc - 2)
 	{
 		create_child(argv[i], envp);

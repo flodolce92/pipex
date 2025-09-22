@@ -6,7 +6,7 @@
 /*   By: flo-dolc <flo-dolc@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:19 by flo-dolc          #+#    #+#             */
-/*   Updated: 2025/05/04 22:46:38 by flo-dolc         ###   ########.fr       */
+/*   Updated: 2025/09/22 03:29:56 by flo-dolc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	write_here_doc(char *limiter, char *infile_name)
 		line = get_next_line(STDIN_FILENO);
 		if (line == NULL)
 			print_error("failed to read line", 1);
-		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
+		if (ft_strncmp(line, limiter, (ft_strlen(line) - 1)) == 0)
 		{
 			free(line);
 			break ;
@@ -69,15 +69,25 @@ void	write_here_doc(char *limiter, char *infile_name)
 	close(infile);
 }
 
-void	open_files(t_pipex *pipex, int argc, char **argv)
+bool	open_files(t_pipex *pipex, int argc, char **argv)
 {
+	bool	success;
+
+	success = true;
 	pipex->infile = open(pipex->infile_name, O_RDONLY);
 	if (pipex->infile == -1)
+	{
+		success = false;
 		print_error("open infile failed", -1);
+	}
 	pipex->outfile = open(argv[argc - 1], pipex->flags, 0644);
 	if (pipex->outfile == -1)
+	{
+		success = false;
 		print_error("open outfile failed", 1);
+	}
 	dup2(pipex->infile, STDIN_FILENO);
+	return (success);
 }
 
 void	last_command(int argc, char **argv, char **envp, t_pipex pipex)
